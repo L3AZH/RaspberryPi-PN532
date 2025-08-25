@@ -8,6 +8,12 @@ int main(int argc, char** argv) {
     uint8_t buff[255];
     uint8_t uid[MIFARE_UID_MAX_LENGTH];
     uint8_t fullInfo[19];
+
+    //init fullInfo
+    for (uint8_t i = 0;  i < sizeof(fullInfo); i++){
+        fullInfo[i] = 0x00;
+    }
+
     int32_t uid_len = 0;
     printf("Hello!\r\n");
     PN532 pn532;
@@ -34,7 +40,7 @@ int main(int argc, char** argv) {
                 printf("%02x ", uid[i]);
             }
             printf("\n");
-            PN532_ReadPassiveTarget(&pn532, fullInfo, PN532_MIFARE_ISO14443A, 1000);
+            PN532_ReadPassiveTargetCustom(&pn532, fullInfo, PN532_MIFARE_ISO14443A, 1000);
             printf("Full information include UID: ");
             for (uint8_t i = 0; i < sizeof(fullInfo); i++) {
                 printf("%02x ", fullInfo[i]);

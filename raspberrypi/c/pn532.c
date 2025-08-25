@@ -258,6 +258,38 @@ int PN532_ReadPassiveTarget(
 }
 
 /**
+  * @brief: same as the above one just minor custom logic
+  */
+int PN532_ReadPassiveTargetCustom(
+    PN532* pn532,
+    uint8_t* response,
+    uint8_t card_baud,
+    uint32_t timeout
+) {
+    // Send passive read command for 1 card.  Expect at most a 7 byte UUID.
+    uint8_t params[] = {0x01, card_baud};
+    uint8_t buff[19];
+    int length = PN532_CallFunction(pn532, PN532_COMMAND_INLISTPASSIVETARGET,
+                        buff, sizeof(buff), params, sizeof(params), timeout);
+    if (length < 0) {
+        return PN532_STATUS_ERROR; // No card found
+    }
+    // Check only 1 card with up to a 7 byte UID is present.
+    if (buff[0] != 0x01) {
+        pn532->log("More than one card detected!");
+        return PN532_STATUS_ERROR;
+    }
+    if (buff[5] > 7) {
+        pn532->log("Found card with unexpectedly long UID!");
+        return PN532_STATUS_ERROR;
+    }
+    for (uint8_t i = 0; i < 19; i++) {
+        response[i] = buff[i];
+    }
+    return 19;
+}
+
+/**
   * @brief: Authenticate specified block number for a MiFare classic card.
   * @param uid: A byte array with the UID of the card.
   * @param uid_length: Length of the UID of the card.
