@@ -32,6 +32,12 @@ int main(int argc, char** argv) {
             for (uint8_t i = 0; i < uid_len; i++) {
                 printf("%02x ", uid[i]);
             }
+            println("");
+
+            printf("Full information include UID: ");
+            for (uint8_t i = 0; i < 10; i++) {
+                printf("%02x ", uid[i]);
+            }
             printf("\r\n");
             break;
         }
