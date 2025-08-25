@@ -42,12 +42,6 @@ int main(int argc, char** argv) {
             break;
         }
     }
-    	/*uint8_t block = 80;
-	if (PN532_MifareClassicAuthenticateBlock(&pn532, uid, uid_len, block, MIFARE_CMD_AUTH_A, key_a) == PN532_STATUS_OK) {
-    		printf("Likely a 4K card\n");
-	} else {
-    		printf("Access to block 80 failed. likely 1K card\n");
-	}*/
 
     /**
       * Warning: DO NOT write the blocks of 4N+3 (3, 7, 11, ..., 63)
@@ -67,21 +61,21 @@ int main(int argc, char** argv) {
         printf("Error: 0x%02x\r\n", pn532_error);
         return -1;
     }
-    pn532_error = PN532_MifareClassicWriteBlock(&pn532, DATA, block_number);
-    if (pn532_error) {
-        printf("Error: 0x%02x\r\n", pn532_error);
-        return -1;
-    }
-    pn532_error = PN532_MifareClassicReadBlock(&pn532, buff, block_number);
-    if (pn532_error) {
-        printf("Error: 0x%02x\r\n", pn532_error);
-        return -1;
-    }
-    for (uint8_t i = 0; i < sizeof(DATA); i++) {
-        if (DATA[i] != buff[i]) {
-            printf("Write block %d failed\r\n", block_number);
-            return -1;
-        }
-    }
+//    pn532_error = PN532_MifareClassicWriteBlock(&pn532, DATA, block_number);
+//    if (pn532_error) {
+//        printf("Error: 0x%02x\r\n", pn532_error);
+//        return -1;
+//    }
+//    pn532_error = PN532_MifareClassicReadBlock(&pn532, buff, block_number);
+//    if (pn532_error) {
+//        printf("Error: 0x%02x\r\n", pn532_error);
+//        return -1;
+//    }
+//    for (uint8_t i = 0; i < sizeof(DATA); i++) {
+//        if (DATA[i] != buff[i]) {
+//            printf("Write block %d failed\r\n", block_number);
+//            return -1;
+//        }
+//    }
     printf("Write block %d successfully\r\n", block_number);
 }
