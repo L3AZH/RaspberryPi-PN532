@@ -54,28 +54,28 @@ int main(int argc, char** argv) {
       */
     // Write block #6
     uint8_t block_number = 6;
-    //uint8_t DATA[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F};
+    uint8_t DATA[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F};
     pn532_error = PN532_MifareClassicAuthenticateBlock(&pn532, uid, uid_len,
             block_number, MIFARE_CMD_AUTH_A, key_a);
     if (pn532_error) {
         printf("Error: 0x%02x\r\n", pn532_error);
         return -1;
     }
-//    pn532_error = PN532_MifareClassicWriteBlock(&pn532, DATA, block_number);
-//    if (pn532_error) {
-//        printf("Error: 0x%02x\r\n", pn532_error);
-//        return -1;
-//    }
-//    pn532_error = PN532_MifareClassicReadBlock(&pn532, buff, block_number);
-//    if (pn532_error) {
-//        printf("Error: 0x%02x\r\n", pn532_error);
-//        return -1;
-//    }
-//    for (uint8_t i = 0; i < sizeof(DATA); i++) {
-//        if (DATA[i] != buff[i]) {
-//            printf("Write block %d failed\r\n", block_number);
-//            return -1;
-//        }
-//    }
+    pn532_error = PN532_MifareClassicWriteBlock(&pn532, DATA, block_number);
+    if (pn532_error) {
+        printf("Error: 0x%02x\r\n", pn532_error);
+        return -1;
+    }
+    pn532_error = PN532_MifareClassicReadBlock(&pn532, buff, block_number);
+    if (pn532_error) {
+        printf("Error: 0x%02x\r\n", pn532_error);
+        return -1;
+    }
+    for (uint8_t i = 0; i < sizeof(DATA); i++) {
+        if (DATA[i] != buff[i]) {
+            printf("Write block %d failed\r\n", block_number);
+            return -1;
+        }
+    }
     printf("Write block %d successfully\r\n", block_number);
 }

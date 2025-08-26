@@ -51,7 +51,6 @@ void readFullDataMifareClassic1K(
     //init buff with 0x00 character
     resetBuff(buff);
 
-    uint32_t pn532_error = PN532_ERROR_NONE;
     for (uint8_t i = 0; i < sizeof(buff); i++) {
         buff[i] = 0x00;
     }
