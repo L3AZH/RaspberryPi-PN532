@@ -55,7 +55,7 @@ void readFullDataMifareClassic1K(
         buff[i] = 0x00;
     }
     // Read data of 4N, 4N+1, 4N+2 block
-    for (uint8_t i = 1; i < 16; i++) {
+    for (uint8_t i = 0; i < 16; i++) {
         //block 4N
         readBlockNumber(pn532, uid, uid_length, key_a, i * 4, buff);
         //block 4N+1
