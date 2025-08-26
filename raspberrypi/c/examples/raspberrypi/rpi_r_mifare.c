@@ -62,6 +62,8 @@ void readFullDataMifareClassic1K(
         readBlockNumber(pn532, uid, uid_length, key_a, i * 4 + 1, buff);
         //block 4N+2
         readBlockNumber(pn532, uid, uid_length, key_a, i * 4 + 2, buff);
+        //block 4N+3
+        readBlockNumber(pn532, uid, uid_length, key_a, i * 4 + 3, buff);
     }
 }
 
