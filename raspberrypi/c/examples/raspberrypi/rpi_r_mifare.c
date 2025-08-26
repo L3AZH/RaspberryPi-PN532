@@ -42,8 +42,8 @@ void readFullDataMifareClassic1K(
             printf("Error: 0x%02x\r\n", pn532_error);
             return;
         }
-        for (uint8_t i=0; i < MIFARE_BLOCK_LENGTH; i++) {
-            printf("%02x ", buff[i]);
+        for (uint8_t j=0; j < MIFARE_BLOCK_LENGTH; j++) {
+            printf("%02x ", buff[j]);
         }
         printf("\n");
         resetBuff(buff);
