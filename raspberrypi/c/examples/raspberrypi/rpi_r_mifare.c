@@ -9,13 +9,13 @@
 #include "pn532_rpi.h"
 
 void resetBuff(uint8_t* buff){
-    for (uint8_t i=0; i< sizeof(buff); i++) {
+    for (uint8_t i=0; i < 255; i++) {
         buff[i] = 0x00;
     }
 }
 
 void readFullDataMifareClassic1K(
-    PN532* pn532,
+    PN532 pn532,
     uint8_t* uid,
     uint8_t uid_length,
     uint8_t* key_a)
@@ -105,6 +105,6 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    readFullDataMifareClassic1K(&pn532, uid, uid_len, key_a);
+    readFullDataMifareClassic1K(pn532, uid, uid_len, key_a);
 }
 
