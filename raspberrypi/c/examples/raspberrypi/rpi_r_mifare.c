@@ -30,7 +30,7 @@ void readFullDataMifareClassic1K(
     }
     // Read data of 4N block
     for (uint8_t i=1; i<16 ; i++){
-        printf("block %d \n", i);
+        printf("block %d \n", i*4);
         pn532_error = PN532_MifareClassicAuthenticateBlock(&pn532, uid, uid_length,
                     i*4, MIFARE_CMD_AUTH_A, key_a);
         if (pn532_error) {
