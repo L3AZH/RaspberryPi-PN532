@@ -34,13 +34,12 @@ void readFullDataMifareClassic1K(
         pn532_error = PN532_MifareClassicAuthenticateBlock(&pn532, uid, uid_length,
                     i*4, MIFARE_CMD_AUTH_A, key_a);
         if (pn532_error) {
-            printf("Error: 0x%02x\r\n", pn532_error);
+            printf("Error when authenticating: 0x%02x\r\n", pn532_error);
             return;
         }
         pn532_error = PN532_MifareClassicReadBlock(&pn532, buff, i*4);
         if (pn532_error) {
-            printf("Error: 0x%02x\r\n", pn532_error);
-            return;
+            printf("Error when reading: 0x%02x\r\n", pn532_error);
         }
         for (uint8_t j=0; j < MIFARE_BLOCK_LENGTH; j++) {
             printf("%02x ", buff[j]);
